@@ -8,9 +8,6 @@ language: go
 env:
   - GO111MODULE=on
 
-services:
-  - redis-server
-
 # You don't need to test on very old version of the Go compiler. It's the user's
 # responsibility to keep their compilers up to date.
 go:
