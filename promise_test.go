@@ -3,10 +3,10 @@ package go_promise
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"fmt"
-	"time"
 	"errors"
+	"fmt"
+	"github.com/stretchr/testify/assert"
+	"time"
 )
 
 func TestNewPromise(t *testing.T) {
@@ -46,12 +46,12 @@ func TestPromise_Start(t *testing.T) {
 	})
 	// blocking success
 	p.Add(func() (res interface{}, err error) {
-		time.Sleep(time.Millisecond*500)
+		time.Sleep(time.Millisecond * 500)
 		return "Ok", nil
 	})
 	// blocking failed
 	p.Add(func() (res interface{}, err error) {
-		time.Sleep(time.Millisecond*500)
+		time.Sleep(time.Millisecond * 500)
 		return "Failed", errors.New("failed")
 	})
 

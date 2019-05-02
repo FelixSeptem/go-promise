@@ -32,20 +32,19 @@ func NewPromise(capacity int, maxConcurrent int) *promise {
 	if maxConcurrent <= 0 {
 		maxConcurrent = DEFAULT_MAXCONCURRENT
 	}
-	wg := sync.WaitGroup{}
-	result := make(chan struct {
-		res interface{}
-		err error
-	}, capacity)
+
 	cm := make(chan struct{}, maxConcurrent)
 	for i := 0; i < maxConcurrent; i++ {
 		cm <- struct{}{}
 	}
 	return &promise{
-		wg:              wg,
-		result:          result,
+		wg: sync.WaitGroup{},
+		result: make(chan struct {
+			res interface{}
+			err error
+		}, capacity),
 		concurrentMutex: cm,
-		done:            make(chan struct{}, 0),
+		done:            make(chan struct{}),
 	}
 }
 
